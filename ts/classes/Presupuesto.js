@@ -13,9 +13,14 @@ export class Presupuesto {
             restante: valor
         };
     }
-    addGastos(gasto) {
-        this.gastos_array = [...this.gastos_array, gasto];
+    addGastos(gasto){
         this.calcularRestante();
+        if(gasto.cantidad > this.presupuesto.restante){
+            return true
+        }else{
+            this.gastos_array = [...this.gastos_array, gasto];
+            this.calcularRestante();
+        }
     }
 
     calcularRestante(){

@@ -31,10 +31,16 @@ const agregarGastos = (e) => {
         return;
     }
     const gasto = { gastos, cantidad, id: Date.now() };
-    classPresupuesto.addGastos(gasto);
+    const result = classPresupuesto.addGastos(gasto);
+    if(result){
+        ui.printAlert('El gasto no pude ser mayor al presupuesto', 'error');
+        return;
+    };
     ui.printAlert('Datos agregados correctamente!!!');
     const { gastos_array, presupuesto } = classPresupuesto;
+    console.log(gastos_array);
     ui.listGastos(gastos_array);
-    ui.updatePresupuesto(presupuesto);
+    ui.updatePresupuesto(presupuesto.restante);
+    ui.comprobarPresupuesto(presupuesto);
 };
 eventListener();

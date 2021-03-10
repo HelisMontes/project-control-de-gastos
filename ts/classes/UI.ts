@@ -48,6 +48,17 @@ export class UI implements ui{
     }
     
     public updatePresupuesto(restante){
-        dataForm.restante.textContent =  restante.restante;
+        dataForm.restante.textContent = restante;
+    }
+
+    public comprobarPresupuesto(presupuesto){
+        const { inicial, restante } = presupuesto;
+        if( (inicial / 4) > restante ){
+            dataForm.restanteDiv.classList.remove('alert-success', 'alert-warning');
+            dataForm.restanteDiv.classList.add('alert-danger');
+        }else if( (inicial / 2) > restante ){
+            dataForm.restanteDiv.classList.remove('alert-success');
+            dataForm.restanteDiv.classList.add('alert-warning');
+        }
     }
 };
