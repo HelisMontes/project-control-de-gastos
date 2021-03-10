@@ -46,4 +46,8 @@ export class UI implements ui{
             dataForm.listaGastos.firstChild.remove();
         };
     }
+    
+    public updatePresupuesto(restante){
+        dataForm.restante.textContent =  restante.restante;
+    }
 };

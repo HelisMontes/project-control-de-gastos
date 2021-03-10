@@ -46,4 +46,8 @@ export class UI {
             dataForm.listaGastos.firstChild.remove();
         };
     };
+
+    updatePresupuesto(restante){
+        dataForm.restante.textContent =  restante.restante;
+    }
 };

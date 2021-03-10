@@ -4,7 +4,7 @@ import {dataForm} from './selectores.js';
 import {gastos_type} from './interfaces/interface_type';
 
 
-const presupuesto =  new Presupuesto()
+const classPresupuesto =  new Presupuesto()
 const ui =  new UI()
 
 const eventListener = ():void => {
@@ -19,7 +19,7 @@ const solicitarPresupuesto = ():void => {
         window.location.reload();
     }
 
-    const mostrar:any = presupuesto.registrarPresupuesto(valor)
+    const mostrar:any = classPresupuesto.registrarPresupuesto(valor)
     ui.insertPresupuesto(mostrar);
 }
 
@@ -35,12 +35,12 @@ const agregarGastos  = (e) => {
         return;
     }
     
-    const gasto:gastos_type = {gastos, cantidad, id: Date.now()}
-    presupuesto.addGastos(gasto);
+    const gasto:gastos_type = { gastos, cantidad, id: Date.now() };
+    classPresupuesto.addGastos(gasto);
     ui.printAlert('Datos agregados correctamente!!!');
-
-    const { gastos_array } = presupuesto
+    const { gastos_array, presupuesto } = classPresupuesto;
     ui.listGastos(gastos_array);
+    ui.updatePresupuesto(presupuesto);
 }
 
 

@@ -4,7 +4,7 @@ import {UI} from './classes/UI.js'
 import {dataForm} from './selectores.js'
 
 
-const presupuesto =  new Presupuesto()
+const classPresupuesto =  new Presupuesto()
 const ui =  new UI()
 const eventListener = () => {
     document.addEventListener('DOMContentLoaded', solicitarPresupuesto);
@@ -15,7 +15,7 @@ const solicitarPresupuesto = () => {
     if (valor <= 0 || isNaN(valor)) {
         window.location.reload();
     }
-    const mostrar = presupuesto.registrarPresupuesto(valor);
+    const mostrar = classPresupuesto.registrarPresupuesto(valor);
     ui.insertPresupuesto(mostrar);
 };
 const agregarGastos = (e) => {
@@ -31,10 +31,10 @@ const agregarGastos = (e) => {
         return;
     }
     const gasto = { gastos, cantidad, id: Date.now() };
-    presupuesto.addGastos(gasto);
+    classPresupuesto.addGastos(gasto);
     ui.printAlert('Datos agregados correctamente!!!');
-    const { gastos_array } = presupuesto
-    console.log(presupuesto)
+    const { gastos_array, presupuesto } = classPresupuesto;
     ui.listGastos(gastos_array);
+    ui.updatePresupuesto(presupuesto);
 };
 eventListener();
