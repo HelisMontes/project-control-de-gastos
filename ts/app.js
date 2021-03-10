@@ -16,7 +16,6 @@ const solicitarPresupuesto = () => {
         window.location.reload();
     }
     const mostrar = presupuesto.registrarPresupuesto(valor);
-    console.log(mostrar)
     ui.insertPresupuesto(mostrar);
 };
 const agregarGastos = (e) => {
@@ -31,6 +30,11 @@ const agregarGastos = (e) => {
         ui.printAlert('Catidad no válida', 'error');
         return;
     }
-    console.log('Agregando.... Gastos');
+    const gasto = { gastos, cantidad, id: Date.now() };
+    presupuesto.addGastos(gasto);
+    ui.printAlert('Datos agregados correctamente!!!');
+    const { gastos_array } = presupuesto
+    console.log(presupuesto)
+    ui.listGastos(gastos_array);
 };
 eventListener();

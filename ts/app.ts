@@ -1,6 +1,7 @@
-import {Presupuesto} from './classes/Presupuesto.js'
-import {UI} from './classes/UI.js'
-import {dataForm} from './selectores.js'
+import {Presupuesto} from './classes/Presupuesto.js';
+import {UI} from './classes/UI.js';
+import {dataForm} from './selectores.js';
+import {gastos_type} from './interfaces/interface_type';
 
 
 const presupuesto =  new Presupuesto()
@@ -33,8 +34,13 @@ const agregarGastos  = (e) => {
         ui.printAlert('Catidad no válida', 'error')
         return;
     }
+    
+    const gasto:gastos_type = {gastos, cantidad, id: Date.now()}
+    presupuesto.addGastos(gasto);
+    ui.printAlert('Datos agregados correctamente!!!');
 
-    console.log('Agregando.... Gastos')
+    const { gastos_array } = presupuesto
+    ui.listGastos(gastos_array);
 }
 
 
