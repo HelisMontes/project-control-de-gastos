@@ -3,12 +3,12 @@ import {Presupuesto} from './classes/Presupuesto.js'
 import {UI} from './classes/UI.js'
 import {dataForm} from './selectores.js'
 
-
 const classPresupuesto =  new Presupuesto()
 const ui =  new UI()
 const eventListener = () => {
     document.addEventListener('DOMContentLoaded', solicitarPresupuesto);
     document.addEventListener('submit', agregarGastos);
+    dataForm.listaGastos.addEventListener('click', eliminarGasto);
 };
 const solicitarPresupuesto = () => {
     const valor = Number(prompt('¿Cual es su presupuesto?'));
@@ -32,7 +32,7 @@ const agregarGastos = (e) => {
     }
     const gasto = { gastos, cantidad, id: Date.now() };
     const result = classPresupuesto.addGastos(gasto);
-    if(result){
+    if (result) {
         ui.printAlert('El gasto no pude ser mayor al presupuesto', 'error');
         return;
     };
@@ -42,5 +42,16 @@ const agregarGastos = (e) => {
     ui.listGastos(gastos_array);
     ui.updatePresupuesto(presupuesto.restante);
     ui.comprobarPresupuesto(presupuesto);
+};
+const eliminarGasto = e => {
+    if (e.target.classList.contains('borrar-gasto')) {
+        const { id } = e.target.parentElement.dataset;
+        classPresupuesto.eliminarGasto(id);
+        const { gastos_array, presupuesto } = classPresupuesto;
+        ui.listGastos(gastos_array);
+        ui.updatePresupuesto(presupuesto.restante);
+        ui.comprobarPresupuesto(presupuesto);
+    }
+    ;
 };
 eventListener();

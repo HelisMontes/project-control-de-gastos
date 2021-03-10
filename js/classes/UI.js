@@ -16,7 +16,7 @@ export class UI {
         }
         else {
             divMessage.classList.add('alert-success');
-            dataForm.formulario.reset()
+            dataForm.formulario.reset();
         }
         divMessage.textContent = message;
         document.querySelector('.primario').insertBefore(divMessage, dataForm.formulario);
@@ -24,11 +24,10 @@ export class UI {
             divMessage.remove();
         }, 3000);
     };
-
-    listGastos(gastos){
+    listGastos(gastos) {
         this.removeHTML_listado();
         gastos.map(gasto => {
-            const {cantidad, gastos, id} = gasto
+            const { cantidad, gastos, id } = gasto;
             const nuevoGasto = document.createElement('li');
             nuevoGasto.className = 'list-group-item d-flex justify-content-between align-items-center';
             nuevoGasto.dataset.id = id; // es igual a nuevoGasto.setAttribute('data-id', id);
@@ -40,25 +39,27 @@ export class UI {
             dataForm.listaGastos.appendChild(nuevoGasto);
         });
     };
-
-    removeHTML_listado(){
-        while(dataForm.listaGastos.firstChild){
+    removeHTML_listado() {
+        while (dataForm.listaGastos.firstChild) {
             dataForm.listaGastos.firstChild.remove();
         };
     };
-
-    updatePresupuesto(restante){
+    updatePresupuesto(restante) {
         dataForm.restante.textContent = restante;
-    }
-
-    comprobarPresupuesto(presupuesto){
+    };
+    comprobarPresupuesto(presupuesto) {
         const { inicial, restante } = presupuesto;
-        if( (inicial / 4) > restante ){
+        if ((inicial / 4) > restante) {
             dataForm.restanteDiv.classList.remove('alert-success', 'alert-warning');
             dataForm.restanteDiv.classList.add('alert-danger');
-        }else if( (inicial / 2) > restante ){
+        }
+        else if ((inicial / 2) > restante) {
             dataForm.restanteDiv.classList.remove('alert-success');
             dataForm.restanteDiv.classList.add('alert-warning');
+        }
+        else {
+            dataForm.restanteDiv.classList.remove('alert-danger', 'alert-warning');
+            dataForm.restanteDiv.classList.add('alert-success');
         }
     }
 };

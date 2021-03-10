@@ -10,6 +10,7 @@ const ui =  new UI()
 const eventListener = ():void => {
     document.addEventListener('DOMContentLoaded', solicitarPresupuesto);
     document.addEventListener('submit', agregarGastos);
+    dataForm.listaGastos.addEventListener('click', eliminarGasto);
 }
 
 const solicitarPresupuesto = ():void => {
@@ -47,5 +48,16 @@ const agregarGastos  = (e) => {
     ui.listGastos(gastos_array);
     ui.updatePresupuesto(presupuesto.restante);
     ui.comprobarPresupuesto(presupuesto);
+};
+
+const eliminarGasto = e => {
+    if(e.target.classList.contains('borrar-gasto')){
+     const { id } = e.target.parentElement.dataset;
+     classPresupuesto.eliminarGasto(id);
+     const { gastos_array, presupuesto } = classPresupuesto;
+     ui.listGastos(gastos_array);
+     ui.updatePresupuesto(presupuesto.restante);
+     ui.comprobarPresupuesto(presupuesto);
+    };
 };
 eventListener();

@@ -1,7 +1,6 @@
 import {Presupuesto as presupuesto, presupuesto_type, gastos_type} from '../interfaces/interface_type'
 
 export class Presupuesto implements presupuesto{
-    
     presupuesto:presupuesto_type;
     gastos_array:gastos_type[];
     
@@ -20,7 +19,7 @@ export class Presupuesto implements presupuesto{
         };
     }
 
-    addGastos(gasto):boolean{
+    public addGastos(gasto):boolean{
         this.calcularRestante();
         if(gasto.cantidad > this.presupuesto.restante){
             return true
@@ -33,5 +32,10 @@ export class Presupuesto implements presupuesto{
     public calcularRestante(){
         const result:number =  this.gastos_array.reduce((total, gasto) => total + gasto.cantidad, 0)
         this.presupuesto.restante = this.presupuesto.inicial - result;
+    }
+    
+    public eliminarGasto(id) {
+        this.gastos_array = this.gastos_array.filter( gasto => gasto.id.toString() !== id );
+        this.calcularRestante();
     }
 }

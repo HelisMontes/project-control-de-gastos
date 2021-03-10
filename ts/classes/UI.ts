@@ -59,6 +59,9 @@ export class UI implements ui{
         }else if( (inicial / 2) > restante ){
             dataForm.restanteDiv.classList.remove('alert-success');
             dataForm.restanteDiv.classList.add('alert-warning');
+        }else{
+            dataForm.restanteDiv.classList.remove('alert-danger', 'alert-warning');
+            dataForm.restanteDiv.classList.add('alert-success');
         }
     }
 };
